@@ -9,7 +9,7 @@ import { useScroll } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 const Header = () => {
-  const scrolled = useScroll(5);
+  const scrolled = useScroll();
   const selectedLayout = usePathname();
   return (
     <div
