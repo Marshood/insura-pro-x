@@ -15,7 +15,7 @@ const SideNav = () => {
 
   const router = useRouter();
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const newLocale = e.target.value;
 
     router.push(router.pathname, router.asPath, { locale: newLocale });
