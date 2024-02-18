@@ -1,0 +1,47 @@
+{
+    "about": "אודות",
+    "contact": "צור קשר",
+    "career": "קריירה",
+    "visit": "בקרו",
+    "invoice": "חשבונית",
+    "workCompleteFrom": "עבור עבודה שהושלמה מ",
+    "to": "עד",
+    "print": "הדפסה",
+    "project": "פרויקט",
+    "hours": "שעות",
+    "rate": "שער",
+    "price": "מחיר",
+    "subtotal": "סכום חלקי",
+    "tax": "מס",
+    "total": "סך הכל",
+    "allRightsReserved": "כל הזכויות שמורות.",
+    "privatePolicy": "מדיניות פרטיות",
+    "licensing": "רישוי",
+    "About": {
+        "title": "אודות",
+        "lastUpdated": "דוגמא זו עודכנה {lastUpdatedRelative} ({lastUpdated, date, short})."
+    },
+    "Index": {
+        "title": "בית",
+        "description": "<p>רק המינימום של הודעות <code>{locale}</code> נטענו כדי להציג דף זה.</p><p>ניווטים אלו זמינים:</p>"
+    },
+    "Navigation": {
+        "index": "בית",
+        "about": "אודות",
+        "switchLocale": "החלף ל{locale, select, de {גרמנית} en {אנגלית} other {לא ידוע}}"
+    },
+    "NotFound": {
+        "title": "מצטערים, לא ניתן למצוא דף זה."
+    },
+    "PageLayout": {
+        "pageTitle": "next-intl"
+    },
+    "StrictTypes": {
+        "nested": {
+            "hello": "שלום",
+            "another": {
+                "level": "רמה"
+            }
+        }
+    }
+}

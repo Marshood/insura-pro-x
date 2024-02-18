@@ -1,0 +1,47 @@
+{
+    "about": "About",
+    "contact": "Contact",
+    "career": "Careers",
+    "visit": "Visit",
+    "invoice": "Invoice",
+    "workCompleteFrom": "For work completed from",
+    "to": "to",
+    "print": "Print",
+    "project": "Project",
+    "hours": "Hours",
+    "rate": "Rate",
+    "price": "Price",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "total": "Total",
+    "allRightsReserved": "All Rights Reserved.",
+    "privatePolicy": "Private Policy",
+    "licensing": "Licensing",
+    "About": {
+      "title": "About",
+      "lastUpdated": "This example was updated {lastUpdatedRelative} ({lastUpdated, date, short})."
+    },
+    "Index": {
+      "title": "Home",
+      "description": "<p>Only the minimum of <code>{locale}</code> messages are loaded to render this page.</p><p>These namespaces are available:</p>"
+    },
+    "Navigation": {
+      "index": "Home",
+      "about": "About",
+      "switchLocale": "Switch to {locale, select, de {German} en {English} other {Unknown}}"
+    },
+    "NotFound": {
+      "title": "Sorry, this page could not be found."
+    },
+    "PageLayout": {
+      "pageTitle": "next-intl"
+    },
+    "StrictTypes": {
+      "nested": {
+        "hello": "Hello",
+        "another": {
+          "level": "Level"
+        }
+      }
+    }
+  }
