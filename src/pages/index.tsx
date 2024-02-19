@@ -23,7 +23,7 @@ export default function Index() {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      // fallback: "blocking",
+      fallback: "blocking",
       messages: (await import(`../../locales/${locale}.json`)).default,
     },
   };
