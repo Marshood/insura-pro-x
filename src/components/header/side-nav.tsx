@@ -12,6 +12,7 @@ import { Icon } from "@iconify/react";
 import { SideNavItem } from "@/type";
 import { useRouter } from "next/router";
 import { useLocale } from "next-intl";
+
 const SideNav = () => {
   const locale = useLocale();
 
@@ -35,7 +36,7 @@ const SideNav = () => {
         <div className="flex flex-col space-y-6 w-full ">
           <Link
             href="/"
-            className="flex flex-row  items-center justify-center md:justify-start  h-12 w-full md:px-1.5"  
+            className="flex flex-row  items-center justify-center md:justify-start  h-12 w-full md:px-1.5"
           >
             <Image
               src={logo}
@@ -60,19 +61,27 @@ const SideNav = () => {
             />
           </Link>
 
-          <div
-            className="flex flex-col space-y-2  md:px-1.5 " 
-          >
+          <div className="flex flex-col space-y-2  md:px-1.5 ">
             {SIDENAV_ITEMS.map((item, idx) => {
               return <MenuItem key={idx} item={item} />;
             })}
           </div>
 
-          <select value={locale} onChange={handleChange}>
-            <option value="en">English</option>
-            <option value="ar">عربي</option>
-            <option value="he">עברית</option>
-          </select>
+          <div className="flex flex-row m-0  p-4 gap-4">
+            <Icon icon="heroicons:language-solid" width="24" height="24" />
+
+            <select
+              value={locale}
+              onChange={handleChange}
+              style={{
+                margin: "0px",
+              }}
+            >
+              <option value="he"> 🇮🇱</option>
+              <option value="en">🇺🇸</option>
+              <option value="ar">🇸🇦</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -96,7 +105,6 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
       {item.submenu ? (
         <>
           <button
-   
             onClick={toggleSubMenu}
             className={`flex gap-4 flex-row items-center p-2 rounded-lg hover-bg-zinc-100 w-full justify-between hover:bg-zinc-100 ${
               pathname.includes(item.path) ? "bg-zinc-100" : ""
@@ -107,16 +115,13 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
               <span className="font-semibold text-xl  flex">{item.title}</span>
             </div>
 
-            <div
-              className={` flex${subMenuOpen ? "rotate-180" : ""} flex`}
-           
-            >
+            <div className={` flex${subMenuOpen ? "rotate-180" : ""} flex`}>
               <Icon icon="lucide:chevron-down" width="24" height="24" />
             </div>
           </button>
 
           {subMenuOpen && (
-            <div className="my-2 ml-12 flex flex-col space-y-4" >
+            <div className="my-2 ml-12 flex flex-col space-y-4">
               {item.subMenuItems?.map((subItem, idx) => {
                 return (
                   <Link
@@ -136,7 +141,6 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
       ) : (
         <Link
           href={item.path}
-        
           className={`flex flex-row gap-4 items-center p-2 rounded-lg hover:bg-zinc-100 ${
             item.path === pathname ? "bg-zinc-100" : ""
           }`}
