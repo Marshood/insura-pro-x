@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-export default function error() {
+const Error = () => {
   const t = useTranslations(); // Replace "common" with your actual namespace
 
   return (
@@ -12,4 +12,6 @@ export default function error() {
       <p>{t("workCompleteFrom")}</p>
     </div>
   );
-}
+};
+
+export default Error;
