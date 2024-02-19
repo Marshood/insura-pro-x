@@ -4,7 +4,8 @@ import React, { useState } from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import Image from "next/image";
+import logo from "../../../public/logo3.svg";
 import { SIDENAV_ITEMS } from "@/constants";
 import { Icon } from "@iconify/react";
 import { SideNavItem } from "@/type";
@@ -31,8 +32,17 @@ const SideNav = () => {
             href="/"
             className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 border-b border-zinc-200 h-12 w-full"
           >
-            <span className="h-7 w-7 bg-zinc-300 rounded-lg" />
-            <span className="font-bold text-xl hidden md:flex">Logo</span>
+            {/* <span className="h-7 w-7 bg-zinc-300 rounded-lg" /> */}
+            {/* <span className="font-bold text-xl hidden md:flex"> */}
+            <Image
+              src={logo}
+              alt="Cultural Events Logo"
+              width={128}
+              height={32}
+              layout="fixed"
+              className="pt-5"
+            />
+            {/* </span> */}
           </Link>
 
           <div className="flex flex-col space-y-2  md:px-6 ">
