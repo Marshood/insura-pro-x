@@ -5,7 +5,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import logo from "../../../public/logo3.svg";
+import logo from "../../../public/newlogo.svg";
+import logoText from "../../../public/logoText.svg";
 import { SIDENAV_ITEMS } from "@/constants";
 import { Icon } from "@iconify/react";
 import { SideNavItem } from "@/type";
@@ -23,8 +24,8 @@ const SideNav = () => {
   };
   return (
     <div
-      className="rounded-md  md:w-60 bg-white h-screen hidden md:flex  
-      overflow-scroll top-0 sticky z-100"
+      className="rounded-md bg-white h-screen hidden md:flex overflow-scroll top-0 sticky 
+      z-100 transition-width duration-300 ease-in-out w-12 md:w-12 hover:w-60"
       style={{
         boxShadow: "0px 5px 10px rgba(21, 22, 26, 0.15)",
         backgroundColor: "#FFFFFF",
@@ -34,7 +35,7 @@ const SideNav = () => {
         <div className="flex flex-col space-y-6 w-full ">
           <Link
             href="/"
-            className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6  h-12 w-full"
+            className="flex flex-row  items-center justify-center md:justify-start  h-12 w-full md:px-1.5"  
           >
             <Image
               src={logo}
@@ -42,11 +43,26 @@ const SideNav = () => {
               width={128}
               height={32}
               layout="fixed"
-              className="pt-5"
+              style={{
+                height: "54px",
+                width: "42px",
+              }}
+            />
+
+            <Image
+              src={logoText}
+              alt="Cultural Events Logo"
+              layout="fixed"
+              style={{
+                height: "42px",
+                width: "74px",
+              }}
             />
           </Link>
 
-          <div className="flex flex-col space-y-2  md:px-6 ">
+          <div
+            className="flex flex-col space-y-2  md:px-1.5 " 
+          >
             {SIDENAV_ITEMS.map((item, idx) => {
               return <MenuItem key={idx} item={item} />;
             })}
@@ -72,28 +88,35 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
     setSubMenuOpen(!subMenuOpen);
   };
 
+  const handleMouseLeave = () => {
+    setSubMenuOpen(false);
+  };
   return (
-    <div className="">
+    <div className="" onMouseLeave={handleMouseLeave}>
       {item.submenu ? (
         <>
           <button
+   
             onClick={toggleSubMenu}
-            className={`flex flex-row items-center p-2 rounded-lg hover-bg-zinc-100 w-full justify-between hover:bg-zinc-100 ${
+            className={`flex gap-4 flex-row items-center p-2 rounded-lg hover-bg-zinc-100 w-full justify-between hover:bg-zinc-100 ${
               pathname.includes(item.path) ? "bg-zinc-100" : ""
             }`}
           >
-            <div className="flex flex-row space-x-4 items-center">
+            <div className="flex flex-row gap-4 items-center" id="1">
               {item.icon}
               <span className="font-semibold text-xl  flex">{item.title}</span>
             </div>
 
-            <div className={`${subMenuOpen ? "rotate-180" : ""} flex`}>
+            <div
+              className={` flex${subMenuOpen ? "rotate-180" : ""} flex`}
+           
+            >
               <Icon icon="lucide:chevron-down" width="24" height="24" />
             </div>
           </button>
 
           {subMenuOpen && (
-            <div className="my-2 ml-12 flex flex-col space-y-4">
+            <div className="my-2 ml-12 flex flex-col space-y-4" >
               {item.subMenuItems?.map((subItem, idx) => {
                 return (
                   <Link
@@ -113,7 +136,8 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
       ) : (
         <Link
           href={item.path}
-          className={`flex flex-row space-x-4 items-center p-2 rounded-lg hover:bg-zinc-100 ${
+        
+          className={`flex flex-row gap-4 items-center p-2 rounded-lg hover:bg-zinc-100 ${
             item.path === pathname ? "bg-zinc-100" : ""
           }`}
         >
