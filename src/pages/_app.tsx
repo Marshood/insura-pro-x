@@ -8,13 +8,21 @@ import type { AppProps } from "next/app";
 import { NextIntlClientProvider } from "next-intl";
 import { useRouter } from "next/router";
 import Layout from "@/components/pageLayout/layout";
+import he from "../../locales/he.json";
+import en from "../../locales/en.json";
+import ar from "../../locales/ar.json";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  console.log("!!! router", router);
+  const locale = router?.locale || "he";
+  const messages = locale === "he" ? he : locale === "ar" ? ar : en;
+  console.log("!!! messages", he);
+
   return (
     <NextIntlClientProvider
       locale={router.locale}
-      messages={pageProps.messages}
+      messages={messages}
       timeZone="Europe/Vienna"
     >
       <Layout>
