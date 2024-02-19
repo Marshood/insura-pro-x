@@ -67,7 +67,12 @@ const SideNav = () => {
             })}
           </div>
 
-          <div className="flex flex-row m-0  p-4 gap-4">
+          <div
+            className="flex flex-row p-4 gap-3 mt-0 m-0"
+            style={{
+              marginTop: "0px !important",
+            }}
+          >
             <Icon icon="heroicons:language-solid" width="24" height="24" />
 
             <select

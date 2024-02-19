@@ -9,7 +9,8 @@ import { SIDENAV_ITEMS } from "@/constants";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import { SideNavItem } from "@/type";
-
+import { useRouter } from "next/router";
+import { useLocale } from "next-intl";
 type MenuItemWithSubMenuProps = {
   item: SideNavItem;
   toggleOpen: () => void;
@@ -38,7 +39,12 @@ const HeaderMobile = (props: any) => {
   const { isOpen, toggleOpen, containerRef } = props;
   const pathname = usePathname();
   const { height } = useDimensions(containerRef);
-
+  const locale = useLocale();
+  const router = useRouter();
+  const handleChange = (e: any) => {
+    const newLocale = e.target.value;
+    router.push(router.pathname, router.asPath, { locale: newLocale });
+  };
   return (
     <motion.nav
       initial={false}
@@ -84,6 +90,24 @@ const HeaderMobile = (props: any) => {
             </div>
           );
         })}
+        <MenuItem className="my-3 h-px w-full bg-gray-300" />
+        <MenuItem>
+          <div className="flex flex-row m-0 gap-4 ">
+            {" "}
+            <Icon icon="heroicons:language-solid" width="24" height="24" />
+            <select
+              value={locale}
+              onChange={handleChange}
+              style={{
+                margin: "0px",
+              }}
+            >
+              <option value="he"> 🇮🇱</option>
+              <option value="en">🇺🇸</option>
+              <option value="ar">🇸🇦</option>
+            </select>
+          </div>
+        </MenuItem>
       </motion.ul>
       {isOpen ? <MenuToggle toggle={toggleOpen} ltr={true} /> : null}
     </motion.nav>
