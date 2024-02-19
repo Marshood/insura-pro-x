@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 import { SIDENAV_ITEMS } from "@/constants";
 import { Icon } from "@iconify/react";
-import { motion, useCycle } from "framer-motion";
+import { motion } from "framer-motion";
 import { SideNavItem } from "@/type";
 
 type MenuItemWithSubMenuProps = {
@@ -34,11 +34,10 @@ const sidebar = {
   },
 };
 
-const HeaderMobile = () => {
+const HeaderMobile = (props: any) => {
+  const { isOpen, toggleOpen, containerRef } = props;
   const pathname = usePathname();
-  const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
-  const [isOpen, toggleOpen] = useCycle(false, true);
 
   return (
     <motion.nav
@@ -86,17 +85,19 @@ const HeaderMobile = () => {
           );
         })}
       </motion.ul>
-      <MenuToggle toggle={toggleOpen} />
+      {isOpen ? <MenuToggle toggle={toggleOpen} ltr={true} /> : null}
     </motion.nav>
   );
 };
 
 export default HeaderMobile;
 
-const MenuToggle = ({ toggle }: { toggle: any }) => (
+export const MenuToggle = ({ toggle, ltr }: { toggle: any; ltr: boolean }) => (
   <button
     onClick={toggle}
-    className="pointer-events-auto absolute right-4 top-[14px] z-30"
+    className={`  pointer-events-auto absolute top-[14px] z-30${
+      ltr ? " right-4 " : " left-4 "
+    }`}
   >
     <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
@@ -225,7 +226,7 @@ const variants = {
   },
 };
 
-const useDimensions = (ref: any) => {
+export const useDimensions = (ref: any) => {
   const dimensions = useRef({ width: 0, height: 0 });
 
   useEffect(() => {

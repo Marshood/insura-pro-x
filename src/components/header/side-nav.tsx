@@ -23,17 +23,19 @@ const SideNav = () => {
   };
   return (
     <div
-      className="md:w-60 bg-white h-screen  border-r border-zinc-200 hidden md:flex   overflow-scroll top-0 sticky z-100"
-      id="marshood 1"
+      className="rounded-md  md:w-60 bg-white h-screen hidden md:flex  
+      overflow-scroll top-0 sticky z-100"
+      style={{
+        boxShadow: "0px 5px 10px rgba(21, 22, 26, 0.15)",
+        backgroundColor: "#FFFFFF",
+      }}
     >
-      <div id="marshood 2 ">
-        <div className="flex flex-col space-y-6 w-full " id="marshood 3">
+      <div>
+        <div className="flex flex-col space-y-6 w-full ">
           <Link
             href="/"
-            className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6 border-b border-zinc-200 h-12 w-full"
+            className="flex flex-row space-x-3 items-center justify-center md:justify-start md:px-6  h-12 w-full"
           >
-            {/* <span className="h-7 w-7 bg-zinc-300 rounded-lg" /> */}
-            {/* <span className="font-bold text-xl hidden md:flex"> */}
             <Image
               src={logo}
               alt="Cultural Events Logo"
@@ -42,7 +44,6 @@ const SideNav = () => {
               layout="fixed"
               className="pt-5"
             />
-            {/* </span> */}
           </Link>
 
           <div className="flex flex-col space-y-2  md:px-6 ">
