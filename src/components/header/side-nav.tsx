@@ -12,8 +12,8 @@ import { Icon } from "@iconify/react";
 import { SideNavItem } from "@/type";
 import { useRouter } from "next/router";
 import { useLocale, useTranslations } from "next-intl";
-import doubleLeft from "../../../public/double-Left.png";
-import doubleright from "../../../public/double-right.png";
+import doubleLeft from "../../../public/doubleLeft.png";
+import doubleright from "../../../public/doubleright.png";
 import { Tooltip } from "react-tooltip";
 
 const SideNav = () => {
