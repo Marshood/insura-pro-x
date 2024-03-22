@@ -20,23 +20,27 @@ const SideNav = () => {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations();
-  const [enableSideBarHover, setEnableSideBarHober] = useState(false);
+  let value;
   const dir = router.locale === "he" || router.locale === "ar" ? "rtl" : "ltr";
-  const isLtr = dir === "ltr";
+  const [enableSideBarHover, setEnableSideBarHober] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      value = localStorage.getItem("enableSideBarHover");
+      setEnableSideBarHober(value === "true");
+    }
+  }, []);
+   const isLtr = dir === "ltr";
   const handleChange = (e: any) => {
     const newLocale = e.target.value;
-
     router.push(router.pathname, router.asPath, { locale: newLocale });
   };
-  useEffect(() => {
-    console.log("!! enableSideBarHover", enableSideBarHover);
-  }, [enableSideBarHover]);
+
   return (
     <div
       className={`rounded-md bg-white h-screen hidden md:flex overflow-scroll top-0 sticky 
       z-100 transition-width duration-300 ease-in-out w-12 ${
         enableSideBarHover ? "md:w-12 hover:w-60 bg-red" : "md:w-60"
-      }`} //md:w-12 hover:w-60
+      }`} 
       style={{
         boxShadow: "0px 5px 10px rgba(21, 22, 26, 0.15)",
         backgroundColor: "#FFFFFF",
@@ -87,7 +91,13 @@ const SideNav = () => {
                 height: "25px",
                 width: "35px",
               }}
-              onClick={() => setEnableSideBarHober((prev) => !prev)}
+              onClick={() => {
+                localStorage.setItem(
+                  "enableSideBarHover",
+                  `${!enableSideBarHover}`
+                );
+                setEnableSideBarHober((prev) => !prev);
+              }}
             />
 
             <Tooltip id="my-tooltip" place="bottom-end" />
