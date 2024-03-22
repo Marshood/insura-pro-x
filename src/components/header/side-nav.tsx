@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -28,11 +28,14 @@ const SideNav = () => {
 
     router.push(router.pathname, router.asPath, { locale: newLocale });
   };
+  useEffect(() => {
+    console.log("!! enableSideBarHover", enableSideBarHover);
+  }, [enableSideBarHover]);
   return (
     <div
       className={`rounded-md bg-white h-screen hidden md:flex overflow-scroll top-0 sticky 
-      z-100 transition-width duration-300 ease-in-out w-12 md:w-60 hover:w-60 ${
-        enableSideBarHover ? "md:w-12 hover:w-60" : ""
+      z-100 transition-width duration-300 ease-in-out w-12 ${
+        enableSideBarHover ? "md:w-12 hover:w-60 bg-red" : "md:w-60"
       }`} //md:w-12 hover:w-60
       style={{
         boxShadow: "0px 5px 10px rgba(21, 22, 26, 0.15)",
