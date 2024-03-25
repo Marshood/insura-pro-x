@@ -33,7 +33,11 @@ const Header = (props: any) => {
                       isOpen ? "" : "pointer-events-none"
                     }`}
                     ref={containerRef}>
-                    <MenuToggle toggle={toggleOpen} ltr={dir === "ltr"} />
+                    <MenuToggle
+                      toggle={toggleOpen}
+                      disabled={false}
+                      ltr={dir === "ltr"}
+                    />
                   </motion.nav>
                 </a>
               </div>
