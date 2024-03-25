@@ -25,26 +25,26 @@ export default function App({ Component, pageProps }: AppProps) {
     <NextIntlClientProvider
       locale={router.locale}
       messages={messages}
-      timeZone="Europe/Vienna"
-    >
+      timeZone="Europe/Vienna">
       <Layout>
-        <div className="flex flex-row top-0 z-100 bg-white	">
+       
+        <Header
+          toggleOpen={toggleOpen}
+          isOpen={isOpen}
+          containerRef={containerRef}
+        />
+        <div className="flex flex-row top-0 z-100 bg-white">
           <SideNav />
-          <MarginWidthWrapper>
-            <Header
-              toggleOpen={toggleOpen}
-              isOpen={isOpen}
-              containerRef={containerRef}
-            />
-            <HeaderMobile
-              toggleOpen={toggleOpen}
-              isOpen={isOpen}
-              containerRef={containerRef}
-            />
-            <PageWrapper>
-              <Component {...pageProps} />
-            </PageWrapper>
-          </MarginWidthWrapper>
+          {/* <MarginWidthWrapper> */}
+          <HeaderMobile
+            toggleOpen={toggleOpen}
+            isOpen={isOpen}
+            containerRef={containerRef}
+          />
+          {/* </MarginWidthWrapper> */}
+          <PageWrapper>
+            <Component {...pageProps} />
+          </PageWrapper>
         </div>
       </Layout>
     </NextIntlClientProvider>

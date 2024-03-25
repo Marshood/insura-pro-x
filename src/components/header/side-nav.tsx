@@ -12,14 +12,12 @@ import { Icon } from "@iconify/react";
 import { SideNavItem } from "@/type";
 import { useRouter } from "next/router";
 import { useLocale, useTranslations } from "next-intl";
-import doubleLeft from "../../../public/doubleLeft.png";
-import doubleright from "../../../public/doubleright.png";
 import { Tooltip } from "react-tooltip";
+
 const SideNav = () => {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations();
-  const dir = router.locale === "he" || router.locale === "ar" ? "rtl" : "ltr";
   const [enableSideBarHover, setEnableSideBarHover] = useState(false);
 
   useEffect(() => {
@@ -29,8 +27,6 @@ const SideNav = () => {
     }
   }, []);
 
-  const isLtr = dir === "ltr";
-
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLocale = e.target.value;
     router.push(router.pathname, router.asPath, { locale: newLocale });
@@ -38,8 +34,7 @@ const SideNav = () => {
 
   return (
     <div
-      className={`rounded-md bg-white h-screen hidden md:flex overflow-scroll top-0 sticky 
-      z-100 transition-width duration-300 ease-in-out w-12 ${
+      className={`rounded-md bg-[#cfcfcf] h-screen hidden md:flex overflow-scroll top-0 sticky z-100 transition-width duration-300 ease-in-out w-12 ${
         enableSideBarHover ? "md:w-12 hover:w-60 bg-red" : "md:w-60"
       }`}>
       <div className="flex justify-between flex-col">
@@ -64,29 +59,6 @@ const SideNav = () => {
                 style={{ height: "42px", width: "74px" }}
               />
             </Link>
-            {/* <Image
-              data-tooltip-id="my-tooltip"
-              data-tooltip-content={t("SWITCH_SIDEBAR_WIDTH")}
-              src={
-                isLtr
-                  ? enableSideBarHover
-                    ? doubleright
-                    : doubleLeft
-                  : enableSideBarHover
-                  ? doubleLeft
-                  : doubleright
-              }
-              alt="Cultural Events Logo"
-              layout="fixed"
-              style={{ height: "25px", width: "35px" }}
-              onClick={() => {
-                localStorage.setItem(
-                  "enableSideBarHover",
-                  `${!enableSideBarHover}`
-                );
-                setEnableSideBarHover((prev) => !prev);
-              }}
-            /> */}
           </div>
 
           {/* Menu Items Section */}
@@ -128,14 +100,7 @@ const SideNav = () => {
                   setEnableSideBarHover((prev) => !prev);
                 }}
               />
-              <div
-                className="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4
-                 peer-focus:ring-blue-300  rounded-full peer dark:bg-gray-700 
-                 
-                 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
-                  peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] 
-                  after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full 
-                  after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+              <div className="relative w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
               <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
             </label>
             <Tooltip id="my-tooltip" place="bottom-end" />
@@ -165,8 +130,8 @@ const MenuItem: React.FC<{ item: SideNavItem }> = ({ item }) => {
         <>
           <button
             onClick={toggleSubMenu}
-            className={`flex gap-4 flex-row items-center p-2 rounded-lg hover-bg-zinc-100 w-full justify-between hover:bg-zinc-100 ${
-              pathname.includes(item.path) ? "bg-zinc-100" : ""
+            className={`flex gap-4 flex-row items-center p-2 rounded-lg w-full justify-between hover:bg-neutral-50	 ${
+              pathname.includes(item.path) ? "bg-neutral-50" : "" 
             }`}>
             <div className="flex flex-row gap-4 items-center" id="1">
               {item.icon}
@@ -192,8 +157,8 @@ const MenuItem: React.FC<{ item: SideNavItem }> = ({ item }) => {
       ) : (
         <Link
           href={item.path}
-          className={`flex flex-row gap-4 items-center p-2 rounded-lg hover:bg-zinc-100 ${
-            item.path === pathname ? "bg-zinc-100" : ""
+          className={`flex flex-row gap-4 items-center p-2 rounded-lg hover:bg-neutral-50	 ${
+            item.path === pathname ? "bg-neutral-50" : ""
           }`}>
           {item.icon}
           <span className="font-semibold text-xl flex">{item.title}</span>

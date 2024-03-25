@@ -39,12 +39,21 @@ const HeaderMobile = (props: any) => {
   const { isOpen, toggleOpen, containerRef } = props;
   const pathname = usePathname();
   const { height } = useDimensions(containerRef);
+  const [disabled, setDisabled] = useState(isOpen);
   const locale = useLocale();
   const router = useRouter();
   const handleChange = (e: any) => {
     const newLocale = e.target.value;
     router.push(router.pathname, router.asPath, { locale: newLocale });
   };
+  useEffect(() => {
+    if (isOpen) {
+      setDisabled(true);
+      setTimeout(() => {
+        setDisabled(false);
+      }, 1500);
+    }
+  }, [isOpen]);
   return (
     <motion.nav
       initial={false}
@@ -53,16 +62,14 @@ const HeaderMobile = (props: any) => {
       className={`fixed inset-0 z-50 w-full md:hidden ${
         isOpen ? "" : "pointer-events-none"
       }`}
-      ref={containerRef}
-    >
+      ref={containerRef}>
       <motion.div
         className="absolute inset-0 right-0 w-full bg-white"
         variants={sidebar}
       />
       <motion.ul
         variants={variants}
-        className="absolute grid w-full gap-3 px-10 py-16"
-      >
+        className="absolute grid w-full gap-3 px-10 py-16">
         {SIDENAV_ITEMS.map((item, idx) => {
           const isLastItem = idx === SIDENAV_ITEMS.length - 1; // Check if it's the last item
 
@@ -77,8 +84,7 @@ const HeaderMobile = (props: any) => {
                     onClick={() => toggleOpen()}
                     className={`flex w-full text-2xl ${
                       item.path === pathname ? "font-bold" : ""
-                    }`}
-                  >
+                    }`}>
                     {item.title}
                   </Link>
                 </MenuItem>
@@ -93,15 +99,13 @@ const HeaderMobile = (props: any) => {
         <MenuItem className="my-3 h-px w-full bg-gray-300" />
         <MenuItem>
           <div className="flex flex-row m-0 gap-4 ">
-            {" "}
             <Icon icon="heroicons:language-solid" width="24" height="24" />
             <select
               value={locale}
               onChange={handleChange}
               style={{
                 margin: "0px",
-              }}
-            >
+              }}>
               <option value="he"> 🇮🇱</option>
               <option value="en">🇺🇸</option>
               <option value="ar">🇸🇦</option>
@@ -109,20 +113,30 @@ const HeaderMobile = (props: any) => {
           </div>
         </MenuItem>
       </motion.ul>
-      {isOpen ? <MenuToggle toggle={toggleOpen} ltr={true} /> : null}
+      {isOpen ? (
+        <MenuToggle toggle={toggleOpen} disabled={disabled} ltr={true} />
+      ) : null}
     </motion.nav>
   );
 };
 
 export default HeaderMobile;
 
-export const MenuToggle = ({ toggle, ltr }: { toggle: any; ltr: boolean }) => (
+export const MenuToggle = ({
+  toggle,
+  ltr,
+  disabled,
+}: {
+  disabled: boolean;
+  toggle: any;
+  ltr: boolean;
+}) => (
   <button
+    disabled={disabled}
     onClick={toggle}
-    className={`  pointer-events-auto absolute top-[14px] z-30${
-      ltr ? " right-4 " : " left-4 "
-    }`}
-  >
+    className={` px-10 pointer-events-auto absolute top-[14px] z-30${
+      ltr ? "right-4 " : "left-4 "
+    }`}>
     <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
         variants={{
@@ -184,12 +198,10 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
       <MenuItem>
         <button
           className="flex w-full text-2xl"
-          onClick={() => setSubMenuOpen(!subMenuOpen)}
-        >
+          onClick={() => setSubMenuOpen(!subMenuOpen)}>
           <div className="flex flex-row justify-between w-full items-center">
             <span
-              className={`${pathname.includes(item.path) ? "font-bold" : ""}`}
-            >
+              className={`${pathname.includes(item.path) ? "font-bold" : ""}`}>
               {item.title}
             </span>
             <div className={`${subMenuOpen && "rotate-180"}`}>
@@ -209,8 +221,7 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
                     onClick={() => toggleOpen()}
                     className={` ${
                       subItem.path === pathname ? "font-bold" : ""
-                    }`}
-                  >
+                    }`}>
                     {subItem.title}
                   </Link>
                 </MenuItem>
